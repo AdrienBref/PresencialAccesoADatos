@@ -12,7 +12,7 @@ Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration
         <property name="connection.username">root</property>
         <property name="connection.password">example</property>
         <!-- dialecto dentro del conector. Importante para claves ajenas-->
-        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Configuraciones adicionales -->
         <!-- JDBC connection pool Conexiones concurrentes -->
         <property name="connection.pool_size">5</property>
@@ -22,6 +22,9 @@ Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration
         <property name="show_sql">true</property>
         <!-- Mantenimiento de la BBDD -->
         <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
+        <property name="hibernate.dialect.storage_engine">innodb</property>
+        <property name="hibernate.show_sql">true</property>
         <!-- opciones de hbm2dll:
         create : Borra y crea SIEMPRE la base de datos
         update : Mantiene los datos, actulizando la estructura de la BBDD.

@@ -1,41 +1,32 @@
 package models;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
-public class Ficha_Tecnica {
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity(name="ficha")
 
+public class Ficha_Tecnica {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Long id;
     private Date fecha;
     private boolean itv;
     private char etiqueta;
+    @OneToOne(mappedBy = "fichaTecnica")
+    private Coche coche;
 
-    public Ficha_Tecnica(){}
     public Ficha_Tecnica(Date fecha, boolean itv, char etiqueta) {
         this.fecha = fecha;
         this.itv = itv;
-        this.etiqueta = etiqueta;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public boolean isItv() {
-        return itv;
-    }
-
-    public void setItv(boolean itv) {
-        this.itv = itv;
-    }
-
-    public char getEtiqueta() {
-        return etiqueta;
-    }
-
-    public void setEtiqueta(char etiqueta) {
         this.etiqueta = etiqueta;
     }
 }

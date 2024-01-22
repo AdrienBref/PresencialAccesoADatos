@@ -1,50 +1,33 @@
 package models;
 
-public class Motor {
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.Set;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity(name="motor")
+public class Motor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Long id;
     private String nombre;
     private double cilindrada;
     private String combustible;
     private double potencia;
-
-    public Motor(){}
+    @OneToMany(mappedBy = "motor")
+    private Set<Coche> coches;
 
     public Motor(String nombre, double cilindrada, String combustible, double potencia) {
         this.nombre = nombre;
         this.cilindrada = cilindrada;
         this.combustible = combustible;
-        this.potencia = potencia;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getCilindrada() {
-        return cilindrada;
-    }
-
-    public void setCilindrada(double cilindrada) {
-        this.cilindrada = cilindrada;
-    }
-
-    public String getCombustible() {
-        return combustible;
-    }
-
-    public void setCombustible(String combustible) {
-        this.combustible = combustible;
-    }
-
-    public double getPotencia() {
-        return potencia;
-    }
-
-    public void setPotencia(double potencia) {
         this.potencia = potencia;
     }
 }
