@@ -8,20 +8,23 @@ import utils.HibernateUtil;
 
 public class InventoryManager {
 
-    private Transaction t = null;
-
-
     public void saveCoche(Coche coche){
-
-        try(Session s = HibernateUtil.getSessionFactory().openSession()) {
-            t = s.beginTransaction();
-            s.persist(coche);
-            t.commit();
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.persist(coche);
+            transaction.commit();
         } catch (Exception e) {
-            if(t != null) {
-                t.rollback();
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
             }
             e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 }
